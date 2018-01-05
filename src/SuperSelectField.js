@@ -140,7 +140,7 @@ const SelectionsPresenter = ({
   floatingLabel, hintText,
   muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
   underlineStyle, underlineFocusStyle,
-  isFocused, isOpen, disabled, errorText, maxSelection,
+  isFocused, isOpen, disabled, errorText, maxSelection
 }) => {
   const { textField: {floatingLabelColor: muiFloatingLabelColor, borderColor: muiBorderColor, focusColor, errorColor} } = muiTheme
 
@@ -187,7 +187,7 @@ const SelectionsPresenter = ({
             floatingLabelStyle={floatingLabelStyle}
             floatingLabelFocusStyle={floatingLabelFocusStyle}
           >
-            {floatingLabel}
+            {floatingLabel}{ selectedValues && selectedValues.length >= maxSelection && `(${maxSelection} max selections)`}
           </FloatingLabel>
         }
         {(shrinkCondition || !floatingLabel) &&
@@ -198,9 +198,6 @@ const SelectionsPresenter = ({
 
       <hr style={baseHRstyle} />
       <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
-      <div style={{ position: 'absolute', bottom: '-20px', left: '0'}}>
-        { selectedValues && selectedValues.length >= maxSelection && `${maxSelection} max selections`}
-      </div>
     </div>)
 }
 
@@ -338,7 +335,7 @@ class SelectField extends Component {
     if (!multiple) return null
 
     let updatedValues = collectValues(children)
-    updatedValues = updatedValues.slice(0, maxSelection);
+    updatedValues = updatedValues.slice(0, maxSelection)
 
     this.setState({ selectedItems: updatedValues }, () => {
       onChange(updatedValues, name)
@@ -430,7 +427,7 @@ class SelectField extends Component {
       let updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
         : selectedItems.concat(selectedItem)
-      updatedValues = updatedValues.slice(0, maxSelection);
+      updatedValues = updatedValues.slice(0, maxSelection)
       this.setState({ selectedItems: updatedValues }, () => {
         onChange(updatedValues, name)
       })
@@ -503,7 +500,7 @@ class SelectField extends Component {
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
       checkedIcon, unCheckedIcon, hoverColor, checkPosition, useLayerForClickAway, errorText,
-      maxSelection,
+      maxSelection
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -608,7 +605,7 @@ class SelectField extends Component {
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
     const menuWidth = this.root ? this.root.clientWidth : null
     const textColor = errorText ? errorColor : palette.textColor
-    const selectedItems = this.state.selectedItems;
+    const selectedItems = this.state.selectedItems
     return (
       <div
         ref={ref => (this.root = ref)}
