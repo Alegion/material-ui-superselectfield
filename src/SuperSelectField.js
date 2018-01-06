@@ -605,7 +605,6 @@ class SelectField extends Component {
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
     const menuWidth = this.root ? this.root.clientWidth : null
     const textColor = errorText ? errorColor : palette.textColor
-    const selectedItems = this.state.selectedItems
     return (
       <div
         ref={ref => (this.root = ref)}
